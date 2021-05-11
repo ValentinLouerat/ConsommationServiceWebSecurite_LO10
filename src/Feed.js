@@ -41,11 +41,11 @@ class Feed extends React.Component {
   }
 
   // création d'un tweet
-  postTweet = (user, text) => {
+  postTweet = (user, password, text) => {
     let newTweet = {user, text};
     fetch(API + uuid(), {
       method: 'PUT',
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Authorization': 'Basic ' + Buffer.from(`${user}:${password}`).toString('base64'), 'Content-Type': 'application/json'},
       body: JSON.stringify(newTweet)
     })
     .then(this.fetchTweets)

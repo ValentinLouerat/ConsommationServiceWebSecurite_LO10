@@ -5,6 +5,7 @@ class BlankTweet extends React.Component {
 
   state = {
     user: '',
+    password: '',
     text: ''
   };
 
@@ -12,10 +13,12 @@ class BlankTweet extends React.Component {
 
   handleChangeText = (event) => this.setState({text: event.target.value});
 
+  handleChangePassword = (event) => this.setState({password: event.target.value});
+
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.postTweet(this.state.user, this.state.text);
-    this.setState({user: '', text: ''});
+    this.props.postTweet(this.state.user, this.state.password, this.state.text);
+    this.setState({user: '', password:'', text: ''});
   }
 
   render() {
@@ -23,6 +26,9 @@ class BlankTweet extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <input placeholder="Qui êtes-vous ?" value={this.state.user}
           onChange={this.handleChangeUser}
+        />
+        <input placeholder="Quel est votre mot de passe ?" value={this.state.password}
+          onChange={this.handleChangePassword} type="password"
         />
         <input placeholder="Quoi de neuf ?" value={this.state.text}
           onChange={this.handleChangeText}
